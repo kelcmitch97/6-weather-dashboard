@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --border-radius: .3rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+main {
+    margin: 20px auto;
+    width: 95%;
+}
+
+.hero {
+    padding: 3% 4%;
+    background-image: linear-gradient(to right, blue , purple);
+    color: white;
+    text-align: center;
+}
+
+
+.btn {
+    font-size: 1rem;
+    text-decoration:none;
+    padding: 6px 5px;
+    width: 100%;
+    margin: 5px 0;
+    border-radius: var(--border-radius);
+    box-shadow: 3px 3px darkblue;
+};
+
+/* CARDS */
+
+.card {
+    margin: 0 0 20px 0;
+    border-radius: var(--border-radius);
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
