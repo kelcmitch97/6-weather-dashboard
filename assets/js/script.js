@@ -54,7 +54,7 @@ var displayCurrentWeather = function (currentWeather) {
     var iconUrl = "http://openweathermap.org/img/wn/" + iconCode + ".png";
     var currentWeatherIconLocation = document.createElement("img");
     currentWeatherIconLocation.setAttribute("src", iconUrl);
- 
+
     // City Name
     var cityName = document.createElement("h3");
     cityName.textContent = currentWeather.name + " " + currentDay;
@@ -63,11 +63,27 @@ var displayCurrentWeather = function (currentWeather) {
     var currentTemp = document.createElement("p");
     currentTemp.textContent = "Temp: " + Math.round(currentWeather.main.temp + (-273.15));
 
+    // Wind Speed
+    var currentWind = document.createElement("p");
+    currentWind.textContent = "Wind: " + Math.round(currentWeather.wind.speed * 2.2369) + " MPH";
+
+    // Humidity
+    var currentHum = document.createElement("p");
+    currentHum.textContent = "Humidity: " + currentWeather.main.humidity + "%";
+
+     // UV Index
+    var cityLon = currentWeather.coord.lon;
+    var cityLat = currentWeather.coord.lat;
+    var uvIndexUrl = "http://api.openweathermap.org/v3/uvi/" + cityLat + "," + cityLon + "/?appid=e5755677cedd310e2759e54b55933d69";
+    console.log(uvIndexUrl);
+
     // Append data to page 
     currentWeatherEl.appendChild(cityName);
     currentWeatherEl.appendChild(currentWeatherIconLocation);
     currentWeatherEl.appendChild(currentTemp);
-   
+    currentWeatherEl.appendChild(currentWind);
+    currentWeatherEl.appendChild(currentHum);
+
 };
 
 
