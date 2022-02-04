@@ -5,8 +5,8 @@ var currentWeatherEl = document.querySelector("#current-weather");
 var futureWeatherEl = document.querySelector("#future-weather");
 
 // Variable to store city searches
-var citySearch="";
-var savedCities=[];
+var citySearch = "";
+var savedCities = [];
 
 // Variable for API key
 var APIkey = "e5755677cedd310e2759e54b55933d69";
@@ -73,7 +73,7 @@ var displayCurrentWeather = function (currentWeather) {
 
     // Temperature in Celsius
     var currentTemp = document.createElement("p");
-    currentTemp.textContent = "Temp: " + Math.round(currentWeather.main.temp + (-273.15));
+    currentTemp.textContent = "Temp: " + Math.round(currentWeather.main.temp + (-273.15)) + "°C";
 
     // Wind Speed
     var currentWind = document.createElement("p");
@@ -88,6 +88,7 @@ var displayCurrentWeather = function (currentWeather) {
     cityLat = currentWeather.coord.lat;
     // Calls function to get UV Index
     getUvIndex(cityLon, cityLat);
+    getFiveDayForecast(cityLon, cityLat);
 
     // Append data to page 
     currentWeatherEl.appendChild(cityName);
@@ -99,32 +100,52 @@ var displayCurrentWeather = function (currentWeather) {
 };
 
 // Function to return UV Index
-var getUvIndex = function(uvIndex) {
-        // Get UVIndex API
-        var uvIndexApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&appid=" + APIkey;
+var getUvIndex = function (cityLon, cityLat) {
+    // Get UVIndex API
+    var uvIndexApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&appid=" + APIkey;
 
-        fetch(uvIndexApi)
-        .then(function(response) {
-            if(response.ok) {
+    fetch(uvIndexApi)
+        .then(function (response) {
+            if (response.ok) {
                 response.json()
-                .then(function(data){
-                    var currentUvIndex = document.createElement("p");
-                    var currentUvIndexValue = document.createElement("span");
-                    currentUvIndex.textContent = "UV Index: ";
-                    currentUvIndexValue.textContent = data.current.uvi;
-                    currentUvIndex.appendChild(currentUvIndexValue);
-                    currentWeatherEl.appendChild(currentUvIndex);
-                });;
+                    .then(function (data) {
+                        console.log(data);
+                        var currentUvIndex = document.createElement("p");
+                        var currentUvIndexValue = document.createElement("span");
+                        currentUvIndex.textContent = "UV Index: ";
+                        currentUvIndexValue.textContent = data.current.uvi;
+                        currentUvIndex.appendChild(currentUvIndexValue);
+                        currentWeatherEl.appendChild(currentUvIndex);
+                    });
             }
         });
 
-    
+
 };
 
 // Function to get 5 Day Forecast
-var get5DayForecast = function (citySearch) {
+var getFiveDayForecast = function (cityLon, cityLat) {
+    // get 5 day forecast
+    var forecastApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&appid=" + APIkey;
+
+    // make request to forecastAPI
+    fetch(forecastApi)
+        .then(function (response) {
+            if (response.ok) {
+                response.json()
+                    .then(function (data) {
+
+                        // Temperature in Celsius
+                        var forecastDayOneTemp = document.createElement("p");
+                        forecastDayOneTemp.textContent = "Temp: " + Math.round(data.daily[0].temp.day + (-273.15)) + "°C";
+                        futureWeatherEl.appendChild(forecastDayOneTemp);
+
+                    });
+            }
+        });
 
 };
+
 
 
 
