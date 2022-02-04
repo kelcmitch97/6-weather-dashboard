@@ -3,9 +3,9 @@ var searchFormEl = document.querySelector("#user-form");
 var searchInputEl = document.querySelector("#city-search");
 var currentWeatherEl = document.querySelector("#current-weather");
 var futureWeatherEl = document.querySelector("#future-weather");
+var searchHistoryEl = document.querySelector("#search-history");
 
 // Forecast Weather Declarations
-var forecastTitleEl = document.querySelector(".forecast-title");
 var forecastDayOneEl = document.querySelector("#forecast-day-one");
 var forecastDayTwoEl = document.querySelector("#forecast-day-two");
 var forecastDayThreeEl = document.querySelector("#forecast-day-three");
@@ -13,13 +13,51 @@ var forecastDayFourEl = document.querySelector("#forecast-day-four");
 var forecastDayFiveEl = document.querySelector("#forecast-day-five");
 
 // Variable to store city searches
-var citySearch = "";
-var savedCities = [];
+var cities = [];
 
 // Variable for API key
 var APIkey = "e5755677cedd310e2759e54b55933d69";
 var cityLon;
 var cityLat;
+
+displaySearchHistory();
+
+// Show search history
+function displaySearchHistory() {
+    // Get stored cities from localStorage
+    var savedCities = JSON.parse(localStorage.getItem("cities"));
+
+    if (savedCities !== null) {
+        cities = savedCities;
+    }
+
+    getCities();
+
+};
+
+// Store search history
+function saveCities() {
+    localStorage.setItem("cities", JSON.stringify(cities));
+    console.log(localStorage);
+};
+
+// Get search history from storage
+function getCities() {
+
+    searchHistoryEl.textContent = "";
+
+    for (var i = 0; i < cities.length; i++) {
+        var city = cities[i];
+
+        var cityList = document.createElement("li");
+        cityList.textContent = city;
+        cityList.setAttribute("id", "list-of-cities");
+        cityList.setAttribute("data-city", city);
+        cityList.setAttribute("class", "list-group-item");
+        searchHistoryEl.appendChild(cityList);
+    }
+};
+
 
 // Function to capture users search criteria and resets the input field 
 var searchFormSubmitHandler = function (event) {
@@ -30,6 +68,9 @@ var searchFormSubmitHandler = function (event) {
 
     if (citySearch) {
         getCityWeatherData(citySearch);
+        cities.push(citySearch); // Add city search to cities array 
+        saveCities();
+        getCities();
         // clear old content
         currentWeatherEl.textContent = "";
         searchInputEl.value = "";
@@ -146,10 +187,9 @@ var getFiveDayForecast = function (cityLon, cityLat) {
                         futureWeatherEl.classList.remove("hidden");
 
                         // Temperature in Celsius
-
                         var forecastDayOneTemp = document.createElement("p");
                         forecastDayOneTemp.textContent = "Temp: " + Math.round(data.daily[0].temp.day + (-273.15)) + "°C";
-                        forecastDayOne.appendChild(forecastDayOneTemp);
+                        forecastDayOneEl.appendChild(forecastDayOneTemp);
 
                     });
             }
@@ -160,5 +200,8 @@ var getFiveDayForecast = function (cityLon, cityLat) {
 
 
 
+
+
 // Event Listener on the search form button to trigger the functions that handle displaying the weather data
 searchFormEl.addEventListener("submit", searchFormSubmitHandler);
+
