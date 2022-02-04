@@ -4,6 +4,14 @@ var searchInputEl = document.querySelector("#city-search");
 var currentWeatherEl = document.querySelector("#current-weather");
 var futureWeatherEl = document.querySelector("#future-weather");
 
+// Forecast Weather Declarations
+var forecastTitleEl = document.querySelector(".forecast-title");
+var forecastDayOneEl = document.querySelector("#forecast-day-one");
+var forecastDayTwoEl = document.querySelector("#forecast-day-two");
+var forecastDayThreeEl = document.querySelector("#forecast-day-three");
+var forecastDayFourEl = document.querySelector("#forecast-day-four");
+var forecastDayFiveEl = document.querySelector("#forecast-day-five");
+
 // Variable to store city searches
 var citySearch = "";
 var savedCities = [];
@@ -135,10 +143,13 @@ var getFiveDayForecast = function (cityLon, cityLat) {
                 response.json()
                     .then(function (data) {
 
+                        futureWeatherEl.classList.remove("hidden");
+
                         // Temperature in Celsius
+
                         var forecastDayOneTemp = document.createElement("p");
                         forecastDayOneTemp.textContent = "Temp: " + Math.round(data.daily[0].temp.day + (-273.15)) + "°C";
-                        futureWeatherEl.appendChild(forecastDayOneTemp);
+                        forecastDayOne.appendChild(forecastDayOneTemp);
 
                     });
             }

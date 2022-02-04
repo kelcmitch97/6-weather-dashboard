@@ -9,7 +9,7 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+        href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Weather DashBoard</title>
 </head>
@@ -26,7 +26,8 @@
                     <div class="card">
                         <form id="user-form" class="card-body">
                             <label class="card-title form-label">Search for a City:</label>
-                            <input id="city-search" class="form-control" name="city-name" type="text" placeholder="Enter City Here"/>
+                            <input id="city-search" class="form-control" name="city-name" type="text"
+                                placeholder="Enter City Here" />
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>
                     </div>
@@ -40,8 +41,47 @@
                         Search History
                     </div>
                 </div>
-                <div id="future-weather" class="col-md-8">
-                    
+                <!-- Forecast Weather -->
+                <div id="future-weather" class="col-md-8 hidden">
+                    <h3>5-Day Forecast:</h3>
+                    <div class="row">
+                        <div class="col w-20">
+                            <div class="card text-white bg-primary">
+                                <div class="card-body" id="forecast-day-one">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col w-20">
+                            <div class="card text-white bg-primary">
+                                <div class="card-body" id="forecast-day-two">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col w-20">
+                            <div class="card text-white bg-primary">
+                                <div class="card-body" id="forecast-day-three">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col w-20">
+                            <div class="card text-white bg-primary">
+                                <div class="card-body" id="forecast-day-four">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col w-20">
+                            <div class="card text-white bg-primary">
+                                <div class="card-body" id="forecast-day-five">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

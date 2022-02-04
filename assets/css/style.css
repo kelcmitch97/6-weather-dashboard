@@ -47,3 +47,11 @@ main {
     font-size: 20px;
     font-weight: bold;
 }
+
+.future-weather {
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
