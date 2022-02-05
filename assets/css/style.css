@@ -48,8 +48,49 @@ main {
     cursor: pointer;
 }
 
+#search-history li {
+    border-radius: var(--border-radius);
+}
+
 #search-history li:hover {
-    background-color: blue;
+    background-color: #1585e7; 
     color: white;
 }
+
+.card-body {
+    text-align: center;
+}
+
+/* UV Index Colors */
+
+.low {
+    background-color: rgb(29, 136, 29);
+    color: white;
+    font-size: bold;
+    padding: 10px;
+}
+
+.moderate {
+    background-color: rgb(230, 233, 52);
+    color: white;
+    font-size: bold;
+    padding: 10px;
+}
+
+.high {
+    background-color: rgb(214, 69, 44);
+    color: white;
+    font-size: bold;
+    padding: 10px;
+}
+
+.extreme {
+    background-color: rgb(115, 52, 233);
+    color: white;
+    font-size: bold;
+    padding: 10px;
+}
+
+
+
 

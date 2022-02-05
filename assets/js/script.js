@@ -87,6 +87,7 @@ var searchFormSubmitHandler = function (event) {
         searchInputEl.value = "";
 
         if (cities.indexOf(citySearch) == -1) {
+            citySearch = citySearch.charAt(0).toUpperCase() + citySearch.slice(1);
             cities.unshift(citySearch); // Add city search to cities array 
             saveCities();
             getCities();
@@ -185,11 +186,24 @@ var getUvIndex = function (cityLon, cityLat) {
                         currentUvIndexValue.textContent = data.current.uvi;
                         currentUvIndex.appendChild(currentUvIndexValue);
                         currentWeatherEl.appendChild(currentUvIndex);
+                        getUvIndexColor(currentUvIndexValue);
                     });
             }
         });
+};
 
+function getUvIndexColor(currentUvIndexValue) {
+    var uvColor = currentUvIndexValue.textContent;
 
+    if (uvColor < 2) {
+        currentUvIndexValue.classList.add("low");
+    } else if (uvColor < 5) {
+        currentUvIndexValue.classList.add("moderate");
+    } else if (uvColor < 10) {
+        currentUvIndexValue.classList.add("high");
+    } else if (uvColor < 11) {
+        currentUvIndexValue.classList.add("extreme");
+    }
 };
 
 // Function to get 5 Day Forecast
