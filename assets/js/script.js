@@ -21,56 +21,55 @@ var APIkey = "e5755677cedd310e2759e54b55933d69";
 var cityLon;
 var cityLat;
 
-// displaySearchHistory();
+displaySearchHistory();
 
-// // Show search history
-// function displaySearchHistory() {
-//     // Get stored cities from localStorage
-//     var savedCities = JSON.parse(localStorage.getItem("cities"));
+// Show search history
+function displaySearchHistory() {
+    // Get stored cities from localStorage
+    var savedCities = JSON.parse(localStorage.getItem("cities"));
 
-//     if (savedCities !== null) {
-//         cities = savedCities;
-//     }
+    if (savedCities !== null) {
+        cities = savedCities;
+    }
 
-//     getCities();
+    getCities();
 
-// };
+};
 
-// // Store search history
-// function saveCities() {
-//     localStorage.setItem("cities", JSON.stringify(cities));
-//     console.log(localStorage);
-// };
+// Store search history
+function saveCities() {
+    localStorage.setItem("cities", JSON.stringify(cities));
+    console.log(localStorage);
+};
 
-// // Get search history from storage
-// function getCities() {
+// Get search history from storage
+function getCities() {
 
-//     searchHistoryContainerEl.textContent = "";
+    searchHistoryContainerEl.textContent = "";
 
-//     for (var i = 0; i < cities.length; i++) {
-//         var city = cities[i];
+    for (var i = 0; i < cities.length; i++) {
+        var city = cities[i];
 
-//         var cityList = document.createElement("li");
-//         cityList.textContent = city;
-//         cityList.setAttribute("id", "list-of-cities");
-//         cityList.setAttribute("data-city", city);
-//         cityList.setAttribute("class", "list-group-item");
-//         searchHistoryContainerEl.appendChild(cityList);
-//     }
-// };
+        var cityList = document.createElement("li");
+        cityList.textContent = city;
+        cityList.setAttribute("id", "list-of-cities");
+        cityList.setAttribute("data-city", city);
+        cityList.setAttribute("class", "list-group-item");
+        searchHistoryContainerEl.appendChild(cityList);
+    }
+};
 
-// // Display the past search when the city in the search history is clicked
-// var searchHistoryHandler = function (event) {
-//     event.preventDefault();
-//     var cityList = event.target;
+// Display the past search when the city in the search history is clicked
+var searchHistoryHandler = function (event) {
+    event.preventDefault();
+    var cityList = event.target;
 
-//     if (event.target.matches("li")) {
-//         currentWeatherEl.textContent = ""; // resets current weather display
-//         // futureWeatherEl.textContent = ""; // resets forecast weather display
-//         citySearch = cityList.textContent.trim();
-//         getCityWeatherData(citySearch);
-//     }
-// };
+    if (event.target.matches("li")) {
+        currentWeatherEl.textContent = ""; // resets current weather display
+        citySearch = cityList.textContent.trim();
+        getCityWeatherData(citySearch);
+    }
+};
 
 
 
@@ -86,10 +85,12 @@ var searchFormSubmitHandler = function (event) {
         getCityWeatherData(citySearch);
         currentWeatherEl.textContent = "";
         searchInputEl.value = "";
-        cities.push(citySearch); // Add city search to cities array 
-        saveCities();
-        getCities();
 
+        if (cities.indexOf(citySearch) == -1) {
+            cities.push(citySearch); // Add city search to cities array 
+            saveCities();
+            getCities();
+        }
 
     }
     else {
@@ -206,10 +207,11 @@ var getFiveDayForecast = function (cityLon, cityLat) {
 
                         futureWeatherEl.classList.remove("hidden");
 
+                        forecastDayOneEl.innerHTML = "";
                         // Day1 Date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
                         var forecastDayOneDate = document.createElement("h5");
                         forecastDayOneDate.textContent = moment().add(1, "d").format("M/DD/YYYY"),
-                            forecastDayOneEl.appendChild(forecastDayOneDate);
+                        forecastDayOneEl.appendChild(forecastDayOneDate);
                         // Day1 Icon
                         var iconCode1 = data.daily[0].weather[0].icon;
                         var iconUrl1 = "http://openweathermap.org/img/wn/" + iconCode1 + ".png";
@@ -229,6 +231,7 @@ var getFiveDayForecast = function (cityLon, cityLat) {
                         forecastDayOneHumidity.textContent = "Humidity: " + data.daily[0].humidity + "%";
                         forecastDayOneEl.appendChild(forecastDayOneHumidity);
 
+                        forecastDayTwoEl.innerHTML = "";
                         // Day2 Date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
                         var forecastDayTwoDate = document.createElement("h5");
                         forecastDayTwoDate.textContent = moment().add(2, "d").format("M/DD/YYYY"),
@@ -252,6 +255,7 @@ var getFiveDayForecast = function (cityLon, cityLat) {
                         forecastDayTwoHumidity.textContent = "Humidity: " + data.daily[1].humidity + "%";
                         forecastDayTwoEl.appendChild(forecastDayTwoHumidity);
 
+                        forecastDayThreeEl.innerHTML = "";
                         // Day3 Date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
                         var forecastDayThreeDate = document.createElement("h5");
                         forecastDayThreeDate.textContent = moment().add(3, "d").format("M/DD/YYYY"),
@@ -275,6 +279,7 @@ var getFiveDayForecast = function (cityLon, cityLat) {
                         forecastDayThreeHumidity.textContent = "Humidity: " + data.daily[2].humidity + "%";
                         forecastDayThreeEl.appendChild(forecastDayThreeHumidity);
 
+                        forecastDayFourEl.innerHTML = "";
                         // Day4 Date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
                         var forecastDayFourDate = document.createElement("h5");
                         forecastDayFourDate.textContent = moment().add(4, "d").format("M/DD/YYYY"),
@@ -298,6 +303,7 @@ var getFiveDayForecast = function (cityLon, cityLat) {
                         forecastDayFourHumidity.textContent = "Humidity: " + data.daily[3].humidity + "%";
                         forecastDayFourEl.appendChild(forecastDayFourHumidity);
 
+                        forecastDayFiveEl.innerHTML = "";
                         // Day5 Date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
                         var forecastDayFiveDate = document.createElement("h5");
                         forecastDayFiveDate.textContent = moment().add(5, "d").format("M/DD/YYYY"),
@@ -328,10 +334,6 @@ var getFiveDayForecast = function (cityLon, cityLat) {
 };
 
 
-
-
-
-
 // Event Listener on the search form button to trigger the functions that handle displaying the weather data
 searchFormEl.addEventListener("submit", searchFormSubmitHandler);
-$(document).on("click", searchHistoryHandler);
+$(searchHistoryContainerEl).on("click", searchHistoryHandler);

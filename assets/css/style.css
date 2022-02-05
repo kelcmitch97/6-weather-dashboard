@@ -36,13 +36,20 @@ main {
     box-shadow: 3px 3px darkblue;
 };
 
-
-
 .future-weather {
     width: 100;
 }
 
 .hidden {
     display: none;
+}
+
+#search-history {
+    cursor: pointer;
+}
+
+#search-history li:hover {
+    background-color: blue;
+    color: white;
 }
 
