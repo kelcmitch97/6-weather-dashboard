@@ -87,7 +87,7 @@ var searchFormSubmitHandler = function (event) {
         searchInputEl.value = "";
 
         if (cities.indexOf(citySearch) == -1) {
-            cities.push(citySearch); // Add city search to cities array 
+            cities.unshift(citySearch); // Add city search to cities array 
             saveCities();
             getCities();
         }
