@@ -22,6 +22,14 @@ var cityLon;
 var cityLat;
 
 displaySearchHistory();
+clearSearchHistory();
+
+// Clear Search History button
+function clearSearchHistory() {
+    var clearHistoryBtn = document.createElement("button");
+    clearHistoryBtn.textContent = "Clear History";
+    searchHistoryContainerEl.appendChild(clearHistoryBtn);
+}
 
 // Show search history
 function displaySearchHistory() {
@@ -31,9 +39,7 @@ function displaySearchHistory() {
     if (savedCities !== null) {
         cities = savedCities;
     }
-
     getCities();
-
 };
 
 // Store search history
@@ -70,8 +76,6 @@ var searchHistoryHandler = function (event) {
         getCityWeatherData(citySearch);
     }
 };
-
-
 
 // Function to capture users search criteria and resets the input field 
 var searchFormSubmitHandler = function (event) {
