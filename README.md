@@ -37,7 +37,7 @@ If the user wants to see the past search city weather condition again, just clic
 
 The following image demonstrates the application functionality:
 
-![Weather Dashboard page displaying current weather and 5-Day Forecast for Honolulu](./Assets/03-javascript-homework-demo.png)
+![Weather Dashboard page displaying current weather and 5-Day Forecast for Honolulu](./assets/images/mockup.png)
 
 
 # Deployment

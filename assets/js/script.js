@@ -4,7 +4,6 @@ var searchInputEl = document.querySelector("#city-search");
 var currentWeatherEl = document.querySelector("#current-weather");
 var futureWeatherEl = document.querySelector("#future-weather");
 var searchHistoryContainerEl = document.querySelector("#search-history");
-var searchHistoryListEl = document.querySelector("#search-history-list");
 
 // Forecast Weather Declarations
 var forecastDayOneEl = document.querySelector("#forecast-day-one");
@@ -22,13 +21,15 @@ var cityLon;
 var cityLat;
 
 displaySearchHistory();
-clearSearchHistory();
+
 
 // Clear Search History button
 function clearSearchHistory() {
-    var clearHistoryBtn = document.createElement("button");
-    clearHistoryBtn.textContent = "Clear History";
-    searchHistoryContainerEl.appendChild(clearHistoryBtn);
+    searchHistoryContainerEl.innerHTML = "";
+    cities = [];
+    window.localStorage.clear();
+ 
+
 }
 
 // Show search history
@@ -99,7 +100,7 @@ var searchFormSubmitHandler = function (event) {
 
     }
     else {
-        alert("Please enter a valid city.") // change from alert to modal 
+        alert("Please enter a valid city.");
     }
 
 };
@@ -354,4 +355,5 @@ var getFiveDayForecast = function (cityLon, cityLat) {
 
 // Event Listener on the search form button to trigger the functions that handle displaying the weather data
 searchFormEl.addEventListener("submit", searchFormSubmitHandler);
+searchFormEl.addEventListener("reset", clearSearchHistory);
 $(searchHistoryContainerEl).on("click", searchHistoryHandler);

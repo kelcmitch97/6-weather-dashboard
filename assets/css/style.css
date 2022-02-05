@@ -46,6 +46,8 @@ main {
 
 #search-history {
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 #search-history li {
